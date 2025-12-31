@@ -1,1 +1,27 @@
+# Arquivo: ops-workflows/.github/workflows/security-audit.yml
+name: Reusable Security Audit
 
+on:
+  workflow_call:
+    # Definição dos parâmetros que quem chamar deve enviar
+    inputs:
+      log_level:
+        required: true
+        type: string
+        default: 'info'
+        description: 'Nível de detalhe do log (info, debug, warn)'
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code (do repositório que chamou)
+        uses: actions/checkout@v4
+
+      - name: Executar Scan Simulado
+        run: |
+          echo "Iniciando auditoria de segurança..."
+          echo "Nível de Log: ${{ inputs.log_level }}"
+          echo "Simulando verificação de vulnerabilidades..."
+          sleep 2
+          echo "Scan concluído com sucesso."
